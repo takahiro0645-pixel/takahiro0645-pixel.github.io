@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site.config.mjs';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base>
+  <p class="sub">{SITE.description}</p>
+  {posts.length === 0 && <p>まだ記事がありません。</p>}
+  {posts.map((p) => (
+    <a class="card" href={`/blog/${p.id}/`}>
+      <b>{p.data.title}</b>
+      <div class="sub">{p.data.pubDate.toISOString().slice(0, 10)} {p.data.tags.join(' / ')}</div>
+      <div class="sub">{p.data.description}</div>
+    </a>
+  ))}
+</Base>

@@ -1,0 +1,38 @@
+---
+import { SITE } from '../site.config.mjs';
+const { title = SITE.title, description = SITE.description } = Astro.props;
+---
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title === SITE.title ? title : `${title}｜${SITE.title}`}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta name="twitter:card" content="summary" />
+  <style is:global>
+    body{margin:0;font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;color:#1f2937;background:#fafafa;line-height:1.8}
+    header,footer{background:#111827;color:#fff;padding:14px 18px}
+    header a,footer a{color:#fff;text-decoration:none}
+    main{max-width:760px;margin:0 auto;padding:18px;background:#fff;min-height:70vh}
+    h1{font-size:1.6rem;line-height:1.4}h2{border-left:4px solid #2563eb;padding-left:10px;margin-top:2em}
+    pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;line-height:1.5}
+    code{font-family:Consolas,"JetBrains Mono",monospace}
+    table{border-collapse:collapse;width:100%}td,th{border:1px solid #e5e7eb;padding:6px}
+    a{color:#2563eb}.sub{color:#6b7280;font-size:.9rem}
+    .card{display:block;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin:12px 0;text-decoration:none;color:inherit}
+  </style>
+</head>
+<body>
+  <header><a href="/"><b>{SITE.title}</b></a></header>
+  <main><slot /></main>
+  <footer class="sub">
+    {SITE.x && <><a href={SITE.x}>X</a> ・ </>}{SITE.note && <><a href={SITE.note}>note</a> ・ </>}<a href="/privacy/">プライバシーポリシー・広告について</a><br />
+    {/* Amazon アソシエイトの参加者は、サイト上にこの表示が必要（参加していなければ消してOK） */}
+    Amazonのアソシエイトとして、{SITE.author}は適格販売により収入を得ています。当サイトの記事には広告（アフィリエイトリンク）が含まれる場合があります。<br />
+    © {new Date().getFullYear()} {SITE.author}
+  </footer>
+</body>
+</html>

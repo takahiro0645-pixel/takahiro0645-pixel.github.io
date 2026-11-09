@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site.config.mjs';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={post.data.title} description={post.data.description}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p class="sub">{post.data.pubDate.toISOString().slice(0, 10)} ・ {post.data.tags.join(' / ')}</p>
+    <Content />
+  </article>
+  <hr />
+  {SITE.x && <p class="sub">最新の情報は <a href={SITE.x}>X</a> で発信しています。詳しい解説・コード一式は <a href={SITE.note}>note</a> にまとめています。</p>}
+</Base>
