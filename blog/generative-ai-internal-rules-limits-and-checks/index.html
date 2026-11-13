@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="ja"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>生成AIの社内ルールの作り方｜導入前に決めたい「上限」と「確認」の2本柱【DX担当向け】｜AIとコードで自動化する</title><meta name="description" content="生成AIを社内に導入する前に決めておきたいルールを、「上限」と「確認」の2本柱で整理。入力してよい情報の区分、利用上限、人による確認、情シスとの調整ポイントを解説します。"><link rel="canonical" href="https://takahiro0645-pixel.github.io/blog/generative-ai-internal-rules-limits-and-checks/"><link rel="alternate" type="application/rss+xml" title="AIとコードで自動化する" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><meta property="og:title" content="生成AIの社内ルールの作り方｜導入前に決めたい「上限」と「確認」の2本柱【DX担当向け】"><meta property="og:description" content="生成AIを社内に導入する前に決めておきたいルールを、「上限」と「確認」の2本柱で整理。入力してよい情報の区分、利用上限、人による確認、情シスとの調整ポイントを解説します。"><meta property="og:url" content="https://takahiro0645-pixel.github.io/blog/generative-ai-internal-rules-limits-and-checks/"><meta property="og:type" content="article"><meta property="og:site_name" content="AIとコードで自動化する"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"生成AIの社内ルールの作り方｜導入前に決めたい「上限」と「確認」の2本柱【DX担当向け】","description":"生成AIを社内に導入する前に決めておきたいルールを、「上限」と「確認」の2本柱で整理。入力してよい情報の区分、利用上限、人による確認、情シスとの調整ポイントを解説します。","datePublished":"2026-11-13T00:00:00.000Z","dateModified":"2026-11-13T00:00:00.000Z","author":{"@type":"Person","name":"takahiro0645"},"publisher":{"@type":"Person","name":"takahiro0645"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://takahiro0645-pixel.github.io/blog/generative-ai-internal-rules-limits-and-checks/"},"keywords":"生成AI, 社内ルール, AI導入, DX, 情報セキュリティ, 業務改善, ガイドライン","inLanguage":"ja"}</script><style>body{margin:0;font-family:-apple-system,Hiragino Sans,Noto Sans JP,sans-serif;color:#1f2937;background:#fafafa;line-height:1.8}header,footer{background:#111827;color:#fff;padding:14px 18px}header a,footer a{color:#fff;text-decoration:none}main{max-width:760px;margin:0 auto;padding:18px;background:#fff;min-height:70vh}h1{font-size:1.6rem;line-height:1.4}h2{border-left:4px solid #2563eb;padding-left:10px;margin-top:2em}pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;line-height:1.5}code{font-family:Consolas,JetBrains Mono,monospace}table{border-collapse:collapse;width:100%}td,th{border:1px solid #e5e7eb;padding:6px}main{overflow-wrap:anywhere}main table{display:block;overflow-x:auto}img{max-width:100%;height:auto}a{color:#2563eb}.sub{color:#6b7280;font-size:.9rem}.card{display:block;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin:12px 0;text-decoration:none;color:inherit}
+.toc[data-astro-cid-7jjqptxk]{border:1px solid #e5e7eb;border-radius:10px;padding:12px 16px;margin:16px 0;background:#f9fafb}.toc[data-astro-cid-7jjqptxk] ol[data-astro-cid-7jjqptxk]{margin:6px 0 0;padding-left:20px}.toc[data-astro-cid-7jjqptxk] li[data-astro-cid-7jjqptxk]{margin:2px 0}.toc[data-astro-cid-7jjqptxk] li[data-astro-cid-7jjqptxk].sub2{margin-left:14px;font-size:.92rem}.related[data-astro-cid-7jjqptxk]{margin-top:28px}
+</style></head> <body> <header><a href="/"><b>AIとコードで自動化する</b></a></header> <main> <article data-astro-cid-7jjqptxk> <h1 data-astro-cid-7jjqptxk>生成AIの社内ルールの作り方｜導入前に決めたい「上限」と「確認」の2本柱【DX担当向け】</h1> <p class="sub" data-astro-cid-7jjqptxk><time datetime="2026-11-13T00:00:00.000Z" data-astro-cid-7jjqptxk>2026-11-13</time> ・ 生成AI / 社内ルール / AI導入 / DX / 情報セキュリティ / 業務改善 / ガイドライン</p> <nav class="toc" aria-label="目次" data-astro-cid-7jjqptxk> <b data-astro-cid-7jjqptxk>目次</b> <ol data-astro-cid-7jjqptxk><li class data-astro-cid-7jjqptxk><a href="#生成aiの社内導入は禁止より線引きから" data-astro-cid-7jjqptxk>生成AIの社内導入は「禁止」より「線引き」から</a></li><li class data-astro-cid-7jjqptxk><a href="#社内ルールに入れたい5つの項目" data-astro-cid-7jjqptxk>社内ルールに入れたい5つの項目</a></li><li class data-astro-cid-7jjqptxk><a href="#入力してよい情報は3区分で考える" data-astro-cid-7jjqptxk>入力してよい情報は3区分で考える</a></li><li class data-astro-cid-7jjqptxk><a href="#利用上限は4項目で決める" data-astro-cid-7jjqptxk>利用上限は4項目で決める</a></li><li class data-astro-cid-7jjqptxk><a href="#確認は2段階にする" data-astro-cid-7jjqptxk>確認は2段階にする</a></li><li class="sub2" data-astro-cid-7jjqptxk><a href="#第1確認作成者" data-astro-cid-7jjqptxk>第1確認：作成者</a></li><li class="sub2" data-astro-cid-7jjqptxk><a href="#第2確認別の担当者" data-astro-cid-7jjqptxk>第2確認：別の担当者</a></li><li class data-astro-cid-7jjqptxk><a href="#aiへの指示にもルールを書いておく" data-astro-cid-7jjqptxk>AIへの指示にもルールを書いておく</a></li><li class data-astro-cid-7jjqptxk><a href="#情シスと事前に確認したいポイント" data-astro-cid-7jjqptxk>情シスと事前に確認したいポイント</a></li><li class data-astro-cid-7jjqptxk><a href="#見落としがちな報告しやすさ" data-astro-cid-7jjqptxk>見落としがちな「報告しやすさ」</a></li><li class data-astro-cid-7jjqptxk><a href="#まとめ" data-astro-cid-7jjqptxk>まとめ</a></li></ol> </nav> <h2 id="生成aiの社内導入は禁止より線引きから">生成AIの社内導入は「禁止」より「線引き」から</h2>
+<p>生成AIを社内で使い始めると、最初に増えるのは「これ、AIに貼っていいですか？」という問い合わせです。</p>
+<p>全面禁止にすれば、問い合わせはなくなります。ただし、個人アカウントでの「隠れ利用」が増えやすくなり、かえって管理しにくくなります。</p>
+<p>組織で導入するなら、**何をどこまで使ってよいか（上限）**と、**出力をどう確かめるか（確認）**の2つを、導入前に文章で決めておくのがおすすめです。</p>
+<p>この記事では、DX担当の目線で社内ルールの骨組みを解説します。数値はすべて例なので、自社の規程・契約に合わせて調整してください。</p>
+<h2 id="社内ルールに入れたい5つの項目">社内ルールに入れたい5つの項目</h2>
+<ol>
+<li>使ってよいツール（承認ツール一覧）</li>
+<li>入力してよい情報の区分</li>
+<li>利用上限（量・回数・費用・自動化の範囲）</li>
+<li>出力を確認する手順</li>
+<li>事故が起きたときの報告と、ルールの見直し</li>
+</ol>
+<p>以下、特に相談が多い2〜4を詳しく見ていきます。</p>
+<h2 id="入力してよい情報は3区分で考える">入力してよい情報は3区分で考える</h2>
+<p>細かく分類しすぎると、現場が判断できなくなります。まずは3区分から始めるのが扱いやすいです。</p>
+<table>
+<thead>
+<tr>
+<th>区分</th>
+<th>例</th>
+<th>扱い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A：公開情報</td>
+<td>自社サイトの掲載内容、一般的な質問</td>
+<td>承認ツールならOK</td>
+</tr>
+<tr>
+<td>B：社内一般情報</td>
+<td>匿名化した会議メモ、社内手順書</td>
+<td>入力データが学習に使われないことを確認したツールのみ</td>
+</tr>
+<tr>
+<td>C：入力禁止</td>
+<td>個人情報、顧客名、契約書の原文、パスワード</td>
+<td>すべて禁止</td>
+</tr>
+</tbody>
+</table>
+<p>もう1つのコツは、**「迷ったら区分Cとして扱う」**と書いておくことです。判断のぶれが減ります。</p>
+<h2 id="利用上限は4項目で決める">利用上限は4項目で決める</h2>
+<p>上限を決めるのは、AIの利用を減らすためではありません。<strong>事故の規模を小さく抑えるため</strong>です。</p>
+<ul>
+<li><strong>入力量</strong>：1回に貼る量の目安（例：A4で数枚まで）。人が中身を確かめきれる量にする</li>
+<li><strong>実行回数</strong>：APIや自動処理の1日あたりの上限。処理が暴走したときの歯止めになる</li>
+<li><strong>費用</strong>：部署ごとの月額上限と、上限に近づいたときの通知</li>
+<li><strong>自動化の範囲</strong>：「読む・下書きする」はAIに任せ、「送る・消す・書き換える」は人が実行する</li>
+</ul>
+<p>稟議で「この数値の根拠は？」と聞かれたら、**「試行期間の暫定値で、○か月後に見直す」**と書くのが現実的です。最初から正しい数値を求めると、導入そのものが進まなくなります。</p>
+<h2 id="確認は2段階にする">確認は2段階にする</h2>
+<p>生成AIの出力は、もっともらしい誤りを含むことがあります。そのため、<strong>出力は下書きとして扱う</strong>ことをルールの前提にします。</p>
+<h3 id="第1確認作成者">第1確認：作成者</h3>
+<ul>
+<li>数値・日付・固有名詞を、元の資料で確かめる</li>
+<li>AIが「完了しました」と言っても、実際のファイルや差分を開いて確かめる</li>
+</ul>
+<h3 id="第2確認別の担当者">第2確認：別の担当者</h3>
+<ul>
+<li>社外に出すもの、金額や契約に関わるものは、別の人が確認する</li>
+</ul>
+<p>別のAIに出力をチェックさせる方法も便利です。ただし、それは第1確認の補助と位置づけ、人による確認の代わりにはしないと決めておくと安全です。</p>
+<h2 id="aiへの指示にもルールを書いておく">AIへの指示にもルールを書いておく</h2>
+<p>人のルールと同じ内容を、AIへの指示文にも入れておくと、確認がしやすくなります。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>- 出力は下書きです。人が確認してから使います。</span></span>
+<span class="line"><span>- 資料にない数値・固有名詞は作らず「要確認」と書いてください。</span></span>
+<span class="line"><span>- 完了を報告するときは、変更点を一覧で示してください。</span></span>
+<span class="line"><span>- 送信・削除・上書きは実行せず、操作の案だけを示してください。</span></span></code></pre>
+<h2 id="情シスと事前に確認したいポイント">情シスと事前に確認したいポイント</h2>
+<p>DX担当がルールを作っても、ツールの設定や契約が伴っていなければ実効性がありません。最低限、次の点は情シス・法務と確認しておきます。</p>
+<ul>
+<li>入力データが学習に使われない契約・設定になっているか</li>
+<li>データの保存期間と保存場所</li>
+<li>組織のアカウントで管理できるか、退職時に停止できるか</li>
+<li>費用の上限設定や、上限に近づいたときの通知ができるか</li>
+<li>エージェント型ツールの場合、ファイル操作やコマンド実行の権限を承認制にできるか</li>
+</ul>
+<h2 id="見落としがちな報告しやすさ">見落としがちな「報告しやすさ」</h2>
+<p>ルールに入れておきたいのが、**「誤って入力したら、すぐ報告する。報告者を不利益に扱わない」**という一文です。これがないと、ミスは隠れてしまいます。事故を小さくできるかどうかは、最初の報告の速さで決まります。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>生成AIの社内ルールは、「上限」と「確認」の2本柱で組み立てる</li>
+<li>入力情報は3区分、上限は4項目、確認は2段階から始める</li>
+<li>数値は暫定値とし、見直しの時期を先に決めておく</li>
+<li>情シス・法務と、ツールの設定や契約まで合わせて確認する</li>
+</ul>
+<p>ルールの全文テンプレや、稟議に添える「リスクと対策」対応表、情シスとの確認チェックリストは、noteにまとめています。社内の規程の素案づくりに活用してください。</p> </article> <aside class="related" data-astro-cid-7jjqptxk> <h2 data-astro-cid-7jjqptxk>関連記事</h2> <a class="card" href="/blog/ai-generated-vba-review-checklist/" data-astro-cid-7jjqptxk><b data-astro-cid-7jjqptxk>AIに書かせたExcel VBAが実務で止まる原因と、使う前に確認したい7項目</b><br data-astro-cid-7jjqptxk><span class="sub" data-astro-cid-7jjqptxk>ChatGPTやClaudeが書いたExcel VBAは、本番データで止まることがあります。範囲の固定、Select依存、型違い、エラー処理など、実務で使う前に確認したい7項目を修正例つきで解説します。</span></a> </aside><hr data-astro-cid-7jjqptxk> </main> <footer class="sub"> <a href="/privacy/">プライバシーポリシー・広告について</a> ・ <a href="/rss.xml">RSS</a><br> 
+Amazonのアソシエイトとして、takahiro0645は適格販売により収入を得ています。当サイトの記事には広告（アフィリエイトリンク）が含まれる場合があります。<br>
+© 2026 takahiro0645 </footer> </body></html> 

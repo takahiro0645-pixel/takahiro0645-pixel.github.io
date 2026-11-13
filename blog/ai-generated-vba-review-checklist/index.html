@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AIに書かせたExcel VBAが実務で止まる原因と、使う前に確認したい7項目｜AIとコードで自動化する</title><meta name="description" content="ChatGPTやClaudeが書いたExcel VBAは、本番データで止まることがあります。範囲の固定、Select依存、型違い、エラー処理など、実務で使う前に確認したい7項目を修正例つきで解説します。"><link rel="canonical" href="https://takahiro0645-pixel.github.io/blog/ai-generated-vba-review-checklist/"><link rel="alternate" type="application/rss+xml" title="AIとコードで自動化する" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><meta property="og:title" content="AIに書かせたExcel VBAが実務で止まる原因と、使う前に確認したい7項目"><meta property="og:description" content="ChatGPTやClaudeが書いたExcel VBAは、本番データで止まることがあります。範囲の固定、Select依存、型違い、エラー処理など、実務で使う前に確認したい7項目を修正例つきで解説します。"><meta property="og:url" content="https://takahiro0645-pixel.github.io/blog/ai-generated-vba-review-checklist/"><meta property="og:type" content="article"><meta property="og:site_name" content="AIとコードで自動化する"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"AIに書かせたExcel VBAが実務で止まる原因と、使う前に確認したい7項目","description":"ChatGPTやClaudeが書いたExcel VBAは、本番データで止まることがあります。範囲の固定、Select依存、型違い、エラー処理など、実務で使う前に確認したい7項目を修正例つきで解説します。","datePublished":"2026-11-10T00:00:00.000Z","dateModified":"2026-11-10T00:00:00.000Z","author":{"@type":"Person","name":"takahiro0645"},"publisher":{"@type":"Person","name":"takahiro0645"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://takahiro0645-pixel.github.io/blog/ai-generated-vba-review-checklist/"},"keywords":"Excel VBA, マクロ, 生成AI, ChatGPT, 業務効率化, エラー対処","inLanguage":"ja"}</script><style>body{margin:0;font-family:-apple-system,Hiragino Sans,Noto Sans JP,sans-serif;color:#1f2937;background:#fafafa;line-height:1.8}header,footer{background:#111827;color:#fff;padding:14px 18px}header a,footer a{color:#fff;text-decoration:none}main{max-width:760px;margin:0 auto;padding:18px;background:#fff;min-height:70vh}h1{font-size:1.6rem;line-height:1.4}h2{border-left:4px solid #2563eb;padding-left:10px;margin-top:2em}pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;line-height:1.5}code{font-family:Consolas,JetBrains Mono,monospace}table{border-collapse:collapse;width:100%}td,th{border:1px solid #e5e7eb;padding:6px}main{overflow-wrap:anywhere}main table{display:block;overflow-x:auto}img{max-width:100%;height:auto}a{color:#2563eb}.sub{color:#6b7280;font-size:.9rem}.card{display:block;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin:12px 0;text-decoration:none;color:inherit}
+.toc[data-astro-cid-7jjqptxk]{border:1px solid #e5e7eb;border-radius:10px;padding:12px 16px;margin:16px 0;background:#f9fafb}.toc[data-astro-cid-7jjqptxk] ol[data-astro-cid-7jjqptxk]{margin:6px 0 0;padding-left:20px}.toc[data-astro-cid-7jjqptxk] li[data-astro-cid-7jjqptxk]{margin:2px 0}.toc[data-astro-cid-7jjqptxk] li[data-astro-cid-7jjqptxk].sub2{margin-left:14px;font-size:.92rem}.related[data-astro-cid-7jjqptxk]{margin-top:28px}
+</style></head> <body> <header><a href="/"><b>AIとコードで自動化する</b></a></header> <main> <article data-astro-cid-7jjqptxk> <h1 data-astro-cid-7jjqptxk>AIに書かせたExcel VBAが実務で止まる原因と、使う前に確認したい7項目</h1> <p class="sub" data-astro-cid-7jjqptxk><time datetime="2026-11-10T00:00:00.000Z" data-astro-cid-7jjqptxk>2026-11-10</time> ・ Excel VBA / マクロ / 生成AI / ChatGPT / 業務効率化 / エラー対処</p> <nav class="toc" aria-label="目次" data-astro-cid-7jjqptxk> <b data-astro-cid-7jjqptxk>目次</b> <ol data-astro-cid-7jjqptxk><li class data-astro-cid-7jjqptxk><a href="#aiが書いたvbaはテストでは動く" data-astro-cid-7jjqptxk>AIが書いたVBAは「テストでは動く」</a></li><li class data-astro-cid-7jjqptxk><a href="#確認1範囲が数字で固定されていないか" data-astro-cid-7jjqptxk>確認1：範囲が数字で固定されていないか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認2selectやactivesheetに頼っていないか" data-astro-cid-7jjqptxk>確認2：SelectやActiveSheetに頼っていないか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認3文字列の数字や日付を想定しているか" data-astro-cid-7jjqptxk>確認3：文字列の数字や日付を想定しているか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認4空白行と重複を想定しているか" data-astro-cid-7jjqptxk>確認4：空白行と重複を想定しているか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認5on-error-resume-nextで握りつぶしていないか" data-astro-cid-7jjqptxk>確認5：On Error Resume Nextで握りつぶしていないか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認6画面更新と計算モードを必ず戻しているか" data-astro-cid-7jjqptxk>確認6：画面更新と計算モードを必ず戻しているか</a></li><li class data-astro-cid-7jjqptxk><a href="#確認7パスの直書きと上書きの安全策" data-astro-cid-7jjqptxk>確認7：パスの直書きと上書きの安全策</a></li><li class data-astro-cid-7jjqptxk><a href="#最初の依頼で前提を渡しておく" data-astro-cid-7jjqptxk>最初の依頼で前提を渡しておく</a></li><li class data-astro-cid-7jjqptxk><a href="#まとめ" data-astro-cid-7jjqptxk>まとめ</a></li></ol> </nav> <h2 id="aiが書いたvbaはテストでは動く">AIが書いたVBAは「テストでは動く」</h2>
+<p>ChatGPTやClaude、CopilotにExcel VBAを頼むと、すぐにそれらしいコードが返ってきます。手元の小さなデータで試すと、たいてい動きます。</p>
+<p>ところが本番のファイルで動かすと、途中で止まったり、一部のデータが抜けていたりすることがあります。</p>
+<p>原因の多くは、AIの性能ではなく<strong>こちらが伝えていない前提</strong>にあります。データにどんな汚れが混ざるのか、誰がどんな状況で実行するのか。AIはそれを知りようがありません。</p>
+<p>この記事では、AIが書いたVBAを実務で使う前に確認したい7つの項目を、修正例とあわせて紹介します。</p>
+<p>※コードは説明用に作成した例です。</p>
+<h2 id="確認1範囲が数字で固定されていないか">確認1：範囲が数字で固定されていないか</h2>
+<p><code>For i = 2 To 100</code> や <code>Range("A1:D500")</code> のように、範囲が決め打ちになっていることがあります。テスト時の件数に合わせて書かれているだけなので、データが増えると抜けが出ます。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Dim lastRow As Long</span></span>
+<span class="line"><span>lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row</span></span>
+<span class="line"><span>For i = 2 To lastRow</span></span>
+<span class="line"><span>    ' 処理</span></span>
+<span class="line"><span>Next i</span></span></code></pre>
+<p>最終行を取る列は、伝票番号のように<strong>必ず値が入る列</strong>を選びます。</p>
+<h2 id="確認2selectやactivesheetに頼っていないか">確認2：SelectやActiveSheetに頼っていないか</h2>
+<p><code>Sheets("集計").Select</code> → <code>Selection.Value = ...</code> のような書き方は、実行中に別のブックがアクティブになると、意図しないシートを書き換えるおそれがあります。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Dim ws As Worksheet</span></span>
+<span class="line"><span>Set ws = ThisWorkbook.Worksheets("集計")</span></span>
+<span class="line"><span>ws.Range("A2").Value = "合計"</span></span></code></pre>
+<p>ブックとシートを変数で明示するのが基本です。</p>
+<h2 id="確認3文字列の数字や日付を想定しているか">確認3：文字列の数字や日付を想定しているか</h2>
+<p>自動化が止まる原因は、コードよりデータ側にあることが少なくありません。</p>
+<ul>
+<li><code>1200円</code>、<code>¥1,200</code>、全角の <code>１２００</code></li>
+<li>前後のスペース</li>
+<li><code>#N/A</code> などのエラー値</li>
+</ul>
+<p>セルの値をそのまま計算に使うと、型エラーで止まります。<code>IsError</code>、<code>IsNumeric</code>、<code>IsDate</code> で確認してから使い、変換できない行は記録してスキップする形にしておくと安心です。</p>
+<h2 id="確認4空白行と重複を想定しているか">確認4：空白行と重複を想定しているか</h2>
+<p>人が入力した表には、途中の空白行や同じキーの二重入力が混ざります。重複を「スキップ」「上書き」「合算」のどれにするかは業務ルール次第なので、<strong>AIに依頼するときに指定</strong>してください。指定しないと、AIが勝手に決めてしまいます。</p>
+<p>重複の検出には <code>Scripting.Dictionary</code> が便利です。</p>
+<h2 id="確認5on-error-resume-nextで握りつぶしていないか">確認5：On Error Resume Nextで握りつぶしていないか</h2>
+<p>コードの冒頭に <code>On Error Resume Next</code> があると、エラーが起きても黙って次に進みます。止まらない代わりに、間違った結果がそのまま出力されます。</p>
+<p>エラーを許容するのは「ファイルが開けないかもしれない」など<strong>必要な箇所だけ</strong>にし、直後に <code>On Error GoTo ErrHandler</code> で戻します。</p>
+<h2 id="確認6画面更新と計算モードを必ず戻しているか">確認6：画面更新と計算モードを必ず戻しているか</h2>
+<p>高速化のために <code>ScreenUpdating</code> や計算モードを切り替えるコードはよくあります。問題は、エラーで止まったときに元に戻らない書き方です。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>prevCalc = Application.Calculation</span></span>
+<span class="line"><span>On Error GoTo ErrHandler</span></span>
+<span class="line"><span>Application.ScreenUpdating = False</span></span>
+<span class="line"><span>Application.Calculation = xlCalculationManual</span></span>
+<span class="line"><span>' 処理</span></span>
+<span class="line"><span>CleanExit:</span></span>
+<span class="line"><span>    Application.Calculation = prevCalc</span></span>
+<span class="line"><span>    Application.ScreenUpdating = True</span></span>
+<span class="line"><span>    Exit Sub</span></span>
+<span class="line"><span>ErrHandler:</span></span>
+<span class="line"><span>    MsgBox "エラー " &#x26; Err.Number &#x26; "：" &#x26; Err.Description</span></span>
+<span class="line"><span>    Resume CleanExit</span></span></code></pre>
+<p>正常終了でもエラーでも、必ず <code>CleanExit</code> を通る形にします。</p>
+<h2 id="確認7パスの直書きと上書きの安全策">確認7：パスの直書きと上書きの安全策</h2>
+<ul>
+<li>個人PCのパスが直書きされていると、他の人の環境では動きません</li>
+<li>確認なしの全消去は、押し間違いでデータを失います</li>
+<li>読み込み元を通常モードで開くと、うっかり保存して壊すリスクがあります</li>
+</ul>
+<p>フォルダはダイアログで選ばせる、消去前に確認メッセージを出す、読み込み元は <code>ReadOnly:=True</code> で開く、の3点を確認します。</p>
+<h2 id="最初の依頼で前提を渡しておく">最初の依頼で前提を渡しておく</h2>
+<p>7項目の多くは、依頼の段階で伝えれば最初から反映されやすくなります。たとえば次のような一文を依頼に加えます。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>- Select / ActiveSheet を使わず、ブックとシートを変数で明示する</span></span>
+<span class="line"><span>- 最終行はデータから取得し、範囲を固定しない</span></span>
+<span class="line"><span>- 変換できない値や重複は止めずにスキップし、ログシートに記録する</span></span>
+<span class="line"><span>- エラー時も画面更新と計算モードを元に戻す</span></span></code></pre>
+<p>なお、実際の顧客データや社外秘の数値はAIのチャットに貼らず、ダミーの値で列構成と汚れ方を伝えるようにしましょう。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>AIが書いたVBAは「テストデータで動く」までは早い</li>
+<li>本番で止まる原因は、範囲・参照・型・空白重複・エラー処理・設定の戻し忘れ・パスに集中しやすい</li>
+<li>データの汚れ方と業務ルールを知っているのは自分だけなので、確認と修正は自分の担当と考える</li>
+</ul>
+<p>エラーの読み方を体系的に押さえたい場合は、VBAのエラー対処を扱った書籍を手元に置いておくと、AIの回答が正しいかを判断する助けになります。</p>
+<p>7項目をすべて反映した複数ブック集計のコード全文、AIへのプロンプト5種、本番前のテストチェックリストは、noteにまとめています。</p> </article> <aside class="related" data-astro-cid-7jjqptxk> <h2 data-astro-cid-7jjqptxk>関連記事</h2> <a class="card" href="/blog/generative-ai-internal-rules-limits-and-checks/" data-astro-cid-7jjqptxk><b data-astro-cid-7jjqptxk>生成AIの社内ルールの作り方｜導入前に決めたい「上限」と「確認」の2本柱【DX担当向け】</b><br data-astro-cid-7jjqptxk><span class="sub" data-astro-cid-7jjqptxk>生成AIを社内に導入する前に決めておきたいルールを、「上限」と「確認」の2本柱で整理。入力してよい情報の区分、利用上限、人による確認、情シスとの調整ポイントを解説します。</span></a> </aside><hr data-astro-cid-7jjqptxk> </main> <footer class="sub"> <a href="/privacy/">プライバシーポリシー・広告について</a> ・ <a href="/rss.xml">RSS</a><br> 
+Amazonのアソシエイトとして、takahiro0645は適格販売により収入を得ています。当サイトの記事には広告（アフィリエイトリンク）が含まれる場合があります。<br>
+© 2026 takahiro0645 </footer> </body></html> 
